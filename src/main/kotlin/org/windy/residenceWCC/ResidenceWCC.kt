@@ -8,9 +8,10 @@ import org.bukkit.event.block.BlockBreakEvent
 import org.bukkit.event.block.BlockPlaceEvent
 import org.bukkit.plugin.java.JavaPlugin
 
-class ResidenceWCC : JavaPlugin(), Listener {
+abstract class ResidenceWCC : JavaPlugin(), Listener {
 
     private lateinit var enabledWorlds: List<String>
+    var tip: String = this.config.getString("tip")!!
 
     override fun onEnable() {
         // Save the default config if it does not exist
@@ -18,6 +19,8 @@ class ResidenceWCC : JavaPlugin(), Listener {
 
         // Load the enabled worlds from the config
         enabledWorlds = config.getStringList("enabled-worlds")
+
+        tip = config.getString("tip")!!
 
         // Register event listeners
         server.pluginManager.registerEvents(this, this)
@@ -38,7 +41,7 @@ class ResidenceWCC : JavaPlugin(), Listener {
         // 如果当前位置不在任何领地内，则取消破坏事件
         if (residence == null) {
             event.isCancelled = true
-            player.sendMessage("你不能在此处破坏方块，因为这里不在任何领地内！")
+            player.sendMessage(tip)
         }
     }
 
