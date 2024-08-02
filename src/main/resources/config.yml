@@ -5,3 +5,5 @@ enabled-worlds:
   - world_nether
   - world_mythicbotany_alfheim
   - twilight_forest
+
+tip: "你不能在此处破坏方块，因为这里不在任何RES领地内！"
